@@ -454,7 +454,7 @@ public class Chapter117 {
     // otehr white space characters (in, for isntance, stirng and character literals must be written in escaped from.
     // * \', \", \\, \t, \b, \r, \f, and \n should be preferred over corresponding ocatal (e.g. \047) or Univocde (e.g.
     // \u0027) escaped characters.
-    // * Should there be a need to go againstt the above rules for the sake of testing, the test should generate the
+    // * Should there be a need to go against the above rules for the sake of testing, the test should generate the
     // required input programmatically.
 
 
