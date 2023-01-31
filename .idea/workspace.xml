@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a42e03d-17d3-4cbd-97c2-aa2e72a04a6f" name="Changes" comment="Finishing the Chapter 117 and starting Chapter130 on my PC">
+    <list default="true" id="8a42e03d-17d3-4cbd-97c2-aa2e72a04a6f" name="Changes" comment="Finishing the Chapter 117 on my PC">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chapter130.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chapter130.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +82,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675011078528</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Finishing the Chapter 117 on my PC">
+      <created>1675086043935</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1675086043935</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -100,8 +106,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Testing the IntelliJ" />
     <MESSAGE value="Starting the Chapter 117 on my PC" />
-    <MESSAGE value="Finishing the Chapter 117 on my PC" />
     <MESSAGE value="Finishing the Chapter 117 and starting Chapter130 on my PC" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finishing the Chapter 117 and starting Chapter130 on my PC" />
+    <MESSAGE value="Finishing the Chapter 117 on my PC" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finishing the Chapter 117 on my PC" />
   </component>
 </project>
