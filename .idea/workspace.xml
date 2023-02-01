@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a42e03d-17d3-4cbd-97c2-aa2e72a04a6f" name="Changes" comment="Finishing the Chapter 117 on my PC">
+    <list default="true" id="8a42e03d-17d3-4cbd-97c2-aa2e72a04a6f" name="Changes" comment="Committing the Chapter 132 from my PC">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +90,21 @@
       <option name="project" value="LOCAL" />
       <updated>1675086043935</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Comitting the Chapter 132 from my PC">
+      <created>1675190962018</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1675190962018</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Committing the Chapter 132 from my PC">
+      <created>1675190992210</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1675190992210</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -108,6 +123,8 @@
     <MESSAGE value="Starting the Chapter 117 on my PC" />
     <MESSAGE value="Finishing the Chapter 117 and starting Chapter130 on my PC" />
     <MESSAGE value="Finishing the Chapter 117 on my PC" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finishing the Chapter 117 on my PC" />
+    <MESSAGE value="Comitting the Chapter 132 from my PC" />
+    <MESSAGE value="Committing the Chapter 132 from my PC" />
+    <option name="LAST_COMMIT_MESSAGE" value="Committing the Chapter 132 from my PC" />
   </component>
 </project>
