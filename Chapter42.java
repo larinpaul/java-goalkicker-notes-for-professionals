@@ -504,6 +504,7 @@ public class Chapter42 {
     /// Section 42.7: Object constructor
 
 
+    // IntelliJ
     // YEAH
         // Adding some stuff...
 
