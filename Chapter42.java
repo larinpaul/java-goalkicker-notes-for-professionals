@@ -503,20 +503,125 @@ public class Chapter42 {
 
     /// Section 42.7: Object constructor
 
+    // All constructors in Java must make a call to the Object ocnstructor. This is done with the call super(). This has to be
+    // the first line in a constructor. The reason for this is so that the object can actually becreated on the heapbefore
+    // any additional initialization is performed.
 
-    // Chapter will be here
+    // If you do not specify the call to super() in a constructor the compiler will put it in for you.
+
+    // So all three of these examples are functionally identical
+
+    // with explicit call to super() constructor
+    public class MyClass {
+
+        public MyClass() {
+            super();
+        }
+    }
+
+    // with implicit call to super() constructor
+    public class MyClass {
+
+        public MyClass() {
+            // empty
+        }
+    }
+
+    // with implicit constructor
+    public class MyClass {
+
+    }
+
+    // What about Constructor-Chaining?
+
+    // It is possible to call other constructors as the first instruction of a constructor. As both the explicit call to a super
+    // constructor and the call to another constructor have to be both first cinstructions, they are mutually exclusinve.
+    public class MyClass {
+        public MyClass(int size) {
+
+            doSomethingWith(size);
+
+        }
+
+        public MyClass(Collection<?> initialValues) {
+
+            this(initialValues.size());
+            addInitialValues(initialValues);
+        }
+    }
+
+    // Calling new MyClass(Arrays.asList("a", "b", "c")) will call the second constructor with the List-argument,
+    // which will in turn delegate to the first constructor (which will delegate implicitly to super()) and then call
+    // addInitialValues(int size) with the second size of the list. This is used to reduce code duplication where
+    // multiple constructors need to do the same work.
+
+    // How do I call a specific constructor?
+
+    // Given the example above, one can either call new MyClass("argument") or new MyClass("argument", 0). In other
+    // words, much like method overloading, you just call the constructor with the parameters that are necessary for your
+    // chosen constructor.
+
+    // What will happen in the Object class constructor?
+
+    // Nothing more than would happen in a sub-class that has a feault empty constructor (minus the call to super()).
+
+    // The default empty constructor can be explicityl defined but if not the compiler will put it in for you as long as no
+    // other constructors are already defined.
+
+    // How is an Object then created from the constructor in Object?
+
+    // The actual creating of objects is down to the JVM. Every constructor in Java appears as a special method named
+    // <init> which is responsible for instance initializing. This <init> method is supplied by the compiler and because
+    // <init> is not a valid identifier in Java, it cannot be used directly in the language.
+
+    // How does the JVM invoke this <init> method?
+
+    // The JVM will invoke the <init> method using the invokespecial instruction and can only be invoked on
+    // uninitialized class instances.
+
+    // For more information take a look at the JVM specification adn the Java Language Specification:
+    // * Special Methods (JVM) - JVMS - 2.9
+    // * Constructors - JLS - 8.8
 
 
+    /// Section 42.8: finalize() method
 
+    // This is a protected and non-static method of the Object class. This method is used to perform some final operations
+    // or clean up operations on an aobject before it gets removed from the memory.
 
+    // According to the doc, this method gets called by the garbage collector on an object when garbage
+    // collection determines that there are no more references to the object.
 
+    // But there are no guarantees that finalize() method would get called if the object is still reachable or no Garbage
+    // Collectors run when the object becomes eligible. That's why it's better not to rely on this method.
 
+    // In Java core libraries some usage examples could be found, for instance in FileInputStream.java:
+    protected void finalize() throws IOException {
+        if ((fd != null) && (df != FileDescriptor.in)) {
+            /**
+             * If fd is shared, the references in FileDescriptor
+             * will ensure that the finalizer is only called when
+             * it's safe to do so. All the references using the fd have
+             * become unreachable. We can call close()
+             */
+            close();
+        }
+    }
 
-    
+    // In this case it's the last chance to close the resource if that resource has not been closed before.
 
+    // Generally it's considered bad practice to use finalize() method in applications of any kind and should be avoided.
 
+    // Finalizers are not meant for freeing resources (e.g., closing files). The garbage collector gets called when (if!) the
+    // system runs low on heap space. You can't rely on it to be called when the system is running low on file handles or,
+    // for any other reason.
 
+    // The intended use-case for finalizers is for an object that is about to be reclaimed to notify some other obbject about
+    // its impending doom. A better mechanism now exists for that purpose --- the java.lang.reg.WeakReference<T>
+    // class. If you think you need to write a finalize() method, then you should look into whether you can solve the same
+    // problem using WeakReference instead. If that won't solve your problem,then you may need to re-thinkg your design
+    // on a deeper level.
 
-
+    // For further reading, read "Effective Java" by Joshua Bloch.
 
 }
