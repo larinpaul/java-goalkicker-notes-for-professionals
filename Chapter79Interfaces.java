@@ -32,7 +32,7 @@ public class Cat implements NoiseMakes, FoodEater {
 
     @Override
     public void eat(Food food) {
-        System,out.println("meows appreciatively");
+        System, out.println("meows appreciatively");
     }
 }
 
@@ -40,12 +40,12 @@ public class Cat implements NoiseMakes, FoodEater {
 // notice how a class can practically implement as many interfaces as needed (there is a limit of 65,535
 /// due to JVM Limitation).
 
-NoiseMaker noiseMaker = new Cat(); // Valid
-FoodEater foodEater = new Cat(); // Valid
-Cat cat = new Cat(); // Valid
+    NoiseMaker noiseMaker = new Cat(); // Valid
+    FoodEater foodEater = new Cat(); // Valid
+    Cat cat = new Cat(); // Valid
 
-Cat invalid1 = new NoiseMaker(); // Invalid
-Cat invalid2 = new FoodEater(); // Invalid
+    Cat invalid1 = new NoiseMaker(); // Invalid
+    Cat invalid2 = new FoodEater(); // Invalid
 
 // Note:
 // 1. All variables declared in an interface are public static final
@@ -65,11 +65,11 @@ public interface Animal {
     String getSound(); // Interface methods are public by default
 }
 
-// Override Annotation
-@Override
-public String getSound() {
-    // Code goes here...
-}
+    // Override Annotation
+    @Override
+    public String getSound() {
+        // Code goes here...
+    }
 
 // This forces the compiler to check that we are overriding and prevents the program from defining a new method or
 // messing up the method signature.
@@ -94,11 +94,11 @@ public class Dog implements Animal {
 // In the example, classes Cat and Dog MUST define the getSound() method as methods of an interface are inherently
 // abstract (with the exception of default methods).
 
-// Using the interfaces
-Animal cat = new Cat();
-Animal dog = new Dog();
+    // Using the interfaces
+    Animal cat = new Cat();
+    Animal dog = new Dog();
 System.out.println(cat.getSound()); // prints "meow"
-System.out.println(dog.getSound()); // prints "woof"
+        System.out.println(dog.getSound()); // prints "woof"
 
 
 //// Section 79.3: Extending an interface
@@ -139,7 +139,7 @@ public interface ExtendedResourceService extends BasicResourceService, Alternate
 
 // Interfaces can be extremely helpful in many cases. For example, say you had a list of animals you wanted to
 // loop through the list, each printing the sound they make.
-{cat, dog, bird}
+{cat,dog,bird}
 
 // One way to do this would be to use interfaces. This would allow for the same method to be called on all
 // of the classes
@@ -167,54 +167,54 @@ public class Bird implements Animal {
     }
 }
 
-// We now have three different classes, each of which has a getSound() method. Because all of these classes
+    // We now have three different classes, each of which has a getSound() method. Because all of these classes
 // implement the Animal interface, which declares the getSound() method, any instance of an Animal can have
 // getSound() called on it
-Animal dog = new Dog();
-Animal cat = new Cat();
-Animal bird = new Bird();
+    Animal dog = new Dog();
+    Animal cat = new Cat();
+    Animal bird = new Bird();
 
 dog.getSound(); // "Woof"
-cat.getSound(); // "Meow"
-bird.getSound(); // "Chirp"
+        cat.getSound(); // "Meow"
+        bird.getSound(); // "Chirp"
 
 // Because each of these is an Animal, we could even put the animals in a list, loop through them,
 // and print out their sounds
-Animal[] animals = { new Dog(), new Cat(), new Bird() };
-for (Animal animal : animals) {
-    System.out.println(animal.getSound());
-}
+        Animal[]animals={new Dog(),new Cat(),new Bird()};
+        for(Animal animal:animals){
+        System.out.println(animal.getSound());
+        }
 
 // Because the order of the array is Dog, Cat, and then Bird, "Woof Meow Chrip" will be printed to the console
 
 // Interfaces can also be used as the return value for functions. For example, returning a Dog if the input is "dog",
 // Cat if the input is "cat", and Bird if it is "bird", and then printing the sound of that animal could be done using
-public Animal getAnimalByName(String name) {
-    switch(name.toLowerCase()) {
-        case "dog":
-            return new Dog();
-        case "cat":
-            return new Cat():
-        case "bird":
-            return new Bird();
-        default:
-            return null;
-        }
-}
-
-public String getAnimalSoundByName(String name) {
-    Animal animal = getAnimalByName(name);
-    if (animal == null) {
+public Animal getAnimalByName(String name){
+        switch(name.toLowerCase()){
+        case"dog":
+        return new Dog();
+        case"cat":
+        return new Cat():
+        case"bird":
+        return new Bird();
+default:
         return null;
-        } else {
+        }
+        }
+
+public String getAnimalSoundByName(String name){
+        Animal animal=getAnimalByName(name);
+        if(animal==null){
+        return null;
+        }else{
         return animal.getSound();
         }
         }
 
-String dogSound = getAnimalSoundByName("dog"); // "Woof"
-String catSound = getAnimalSoundByName("cat"); // "Meow"
-String birdSound = getAnimalSoundByName("bird"); // "Chirp"
-String lightbulbSound = getAnimalSoundByName("lightbulb"); // null
+        String dogSound=getAnimalSoundByName("dog"); // "Woof"
+        String catSound=getAnimalSoundByName("cat"); // "Meow"
+        String birdSound=getAnimalSoundByName("bird"); // "Chirp"
+        String lightbulbSound=getAnimalSoundByName("lightbulb"); // null
 
 // Interfaces are also useful for extensibility, because if you want to add a new type of Animal,
 // you wouldn't need to change anything with the operations you perform to them.
@@ -295,7 +295,9 @@ public class MyWorker extends Worker implements Observable {
 
 // In order to solve it, an implementing class must override the shared method and provide its own implementation.
 interface InterfaceA {
-    public defualt String getName() {
+    public defualt String
+
+    getName() {
         return "a";
     }
 }
@@ -318,8 +320,8 @@ public class ImpClass implements InterfaceA, InterfaceB {
         ImpClass c = new ImpClass();
 
         System.out.println(c.getName()); // Prints "ab"
-        System.out.println(((InterfaceA)c).getName()); // Prints "ab"
-        System.out.println(((InterfaceB)c).getName()); // Prints "ab"
+        System.out.println(((InterfaceA) c).getName()); // Prints "ab"
+        System.out.println(((InterfaceB) c).getName()); // Prints "ab"
     }
 }
 
@@ -339,7 +341,6 @@ public class ImpClass implements InterfaceA, InterfaceB {
 /// 22:27
 
 
-
 //// 2023/04/16 // 11:41 //
 //// Section 79.6: Modifiers in Interfaces
 
@@ -355,19 +356,20 @@ interface I {
 
     public abstract void method();
 
-    public static void staticMethod() { ... }
-    public default void defaultMethod() { ... }
+    public static void staticMethod() { ...}
+
+    public default void defaultMethod() { ...}
 }
 
 // Variables
 
-// All interface variables are implicitly constants with implicit public (accessible for all), static (areaccessible
+    // All interface variables are implicitly constants with implicit public (accessible for all), static (areaccessible
 // by interface name) and final (must be initialized during declaration) modifiers:
-public static final int VARIABLE = 0;
+    public static final int VARIABLE = 0;
 
-// Methods:
+    // Methods:
 // 1. All methods which don't provide implementation are implicitly public and abstract.
-public abstract void method();
+    public abstract void method();
 // Version >= Java SE 8
 
 // 2. All methods with static or default modifier must provide implementation and are implicitly public.
@@ -378,8 +380,9 @@ interface I {
 
     void method();
 
-    static void staticMethod() { ... }
-    default void defaultMethod() { ... }
+    static void staticMethod() { ...}
+
+    default void defaultMethod() { ...}
 }
 
 
@@ -392,44 +395,47 @@ interface I {
 public interface IO<IncomingTyoe, OutgoingType> {
 
     void publish(OutgoingType data);
+
     IncomingType consume();
+
     IncomingType RPCSubmit(OutgoingType data);
 
 }
 
-// Now I can instantiate that interface, but since we don't have default implementation for those methods, it'll
+    // Now I can instantiate that interface, but since we don't have default implementation for those methods, it'll
 // need an implementation when we instantiate it:
-IO<String, String> mockIO = new IO<String, String>() {
+    IO<String, String> mockIO = new IO<String, String>() {
 
-    private String channel = "somechannel";
+        private String channel = "somechannel";
 
-    @Override
-    public void publish(String data) {
-        System.out.println("Publishing " + data + " to " + channel);
-    }
+        @Override
+        public void publish(String data) {
+            System.out.println("Publishing " + data + " to " + channel);
+        }
 
-    @Override
-    public String consume() {
-        System.out.println("Consuming from " + channel);
-        return "some useful data";
-    }
+        @Override
+        public String consume() {
+            System.out.println("Consuming from " + channel);
+            return "some useful data";
+        }
 
-    @Override
-    public String RPCSubmit(String data) {
-        return "received " + data + " just now ";
-    }
+        @Override
+        public String RPCSubmit(String data) {
+            return "received " + data + " just now ";
+        }
 
-};
+    };
 
 mockIO.consume(); // prints: Consuming from somechannel
-mickIO.publish("TestData"); // Publishing TestData to somechannel
-System.out.println(mockIO.RPCSubmit("TestData")); // received TestData just now
+        mickIO.publish("TestData"); // Publishing TestData to somechannel
+        System.out.println(mockIO.RPCSubmit("TestData")); // received TestData just now
 
 // We can also do something more useful with that interace, let's say we want to use it
 // to wrap some basic RabbitMQ functions:
 public class RabbitMQ implements IO<String, String> {
 
-    prviate String exchange;
+    prviate String
+    exchange;
     private String queue;
 
     public RabbitMQ(String exchange, String queue) {
@@ -478,19 +484,19 @@ public class VisitCouner implements IO<Long, Integer> {
     }
 }
 
-// Now let's use the VisitCounter:
-VisitCounter counter = new VisitCouner();
+    // Now let's use the VisitCounter:
+    VisitCounter counter = new VisitCouner();
 
 // just had 4 visits, yay
 counter.publish(4);
 // just had another visit, yay
-counter.publish(1);
+        counter.publish(1);
 
 // get data for stats counter
-System.out.println(counter.consume()); // prints 5
+        System.out.println(counter.consume()); // prints 5
 
 // show data for stats counter page, but include that as a page view
-System.out.println(counter.RPCSubmit(1)); // prints 6
+        System.out.println(counter.RPCSubmit(1)); // prints 6
 
 // When implementing multiple interfaces, you can't implement the same interface twice.
 // That also applies to generic interfaces. Thus, the following code is invalid, and will result in a compile error:
@@ -500,8 +506,15 @@ interface Printer<T> {
 
 // Invalid!
 class SystemPrinter implements Printer<Double>, Printer<Integer> {
-    @Override public void print(Double d) { System.out.println("Decimal: " + d); }
-    @Override public void print(Integer i) { System.out.println("Discrete: " + i); }
+    @Override
+    public void print(Double d) {
+        System.out.println("Decimal: " + d);
+    }
+
+    @Override
+    public void print(Integer i) {
+        System.out.println("Discrete: " + i);
+    }
 }
 
 
