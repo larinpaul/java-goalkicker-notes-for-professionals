@@ -137,11 +137,151 @@ System.out.println(howManyOddNumbersParallel); // Output: 2
 // and performing operations on that entity as a whole.
 // Stream and Collection are separate high-level abstractions for these differing purposes.
 
+// 19:30
 
 // Section 57.2: Consuming Streams
 
+// 2024 05 12 12:48
+
+// A Stream will only be traversed when there is a terminal operation,
+// like count(), collect() or forEach().
+// Otherwise, no operation on the Stream will be performed.
+
+// In the following example, no terminal operation is added to the Stream,
+// so the filter() operation will not be invoked and
+// no output will be produced because peek() is NOT a terminal operation.
+
+IntStream.range(1, 10).filter(a -> a % 2 == 0).peek(System.out::println);
+// Live on Ideone
+
+// This is a Stream sequence with a valid terminal operation, thus an output is produced.
+
+// You could also use forEach instead of peek:
+IntStream().range(1, 10).filter(a -> a % 2 == 0).forEach(System.out.println);
+// Output:
+// 2
+// 4
+// 6
+// 8
+
+// After the terminal operation is performed, the Stream is consumer and cannot be reused.
+
+// Although a given stream object cannot be reused,
+// it's easy to create a reusable Iterable, that delegates to a stream pipeline.
+// This can be useful for returning a modified view of a live data set
+// without having to collect results into a temporary structure.
+
+List<String> list = Arrays.asList("FOO", "BAR");
+Iterable<String> iterable = () -> list.stream().map(String::toLowerCase).iterator();
+
+for (String str : iterable) {
+	System.out.println(str);
+}
+for (String str : iterable) {
+	System.out.println(str);
+}
+// Output:
+// foo
+// bar
+// foo
+// bar
+
+// This works because Iterable declares a single abstract method Iterator<T> iterator().
+// That makes it effectively a functional interface,
+// implemented by a lambda that creates a new stream on each call.
+
+// In general, a stream operates as shown in the following image:
+
+// 				Predicate
+//					v
+// transaction -> filter -> collect
+
+// Note: Argument checks are always performed, even without a terminal operation:
+try {
+	IntStream.range(1, 10).filter(null);
+} catch (NullPointerExepction e) {
+	System.out.println("We got a NullPointerExepction as null was passed as an argument to filter()");
+}
+// Output:
+// We got a NullPointerException as null was passed as an argument to filter()
 
 
+
+//# Section 57.3: Creating a Frequency Map
+
+// The groupingBy(classifier, downstream) collector allows the collection
+// of Stream elements into a Map by classifying each element in a group
+// and performing a downstream operation on the elements classified in the same group.
+
+// A classic example of this principle is to use a Map to count the occurrences
+// of elements in a Stream. In this example, the classifier is simply
+// the identity function, which returns the element as-is.
+// The downstream operation counts the number of equal elements, using counting().
+Stream.of("apple", "orange", "banana", "apple")
+		.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+		.entrySet()
+		.forEach(System.out::println);
+		
+// The downstream operation is itself a collector (Collectors.counting())
+// that operates on elements of type String and produces a result of type Long.
+// The result of the collect mehtod call is a Map<String, Long>.
+// This would produce the following output:
+// banana=1
+// orange=1
+// apple=2
+
+
+//# Section 57.4: Infinite Streams
+
+// It is possible to generate a Stream does not end.
+// Calling a terminal method on an infinite Stream causes the Stream
+/// the enter an infinite loop. The limit method of a Stream can be used
+// to limit the number of terms of the Stream that Java processes.
+
+// This example generates a Stream of all natural numbers, starting with the number 1.
+// Each successuve term of the Stream is one higher than the previous.
+// By calling the limit method of this Stream, only the first five terms
+// of the Stream are considered and printed.
+
+// Generate infinite stream - 1, 2, 3, 4, 5, 6, 7, ...
+IntStream naturalNumbers = IntStream.iterate(1, x -> x + 1);
+
+// Print out only the first 5 termns.
+naturalNumbers.limit(5).forEach(System.out::println);
+// Output:
+// 1
+// 2
+// 3
+// 4
+// 5
+
+// Another way of generating an infinite stream is using the Stream.generate method.
+// This method takes a labmda of type Supplier.
+
+// Generate an infinite stream of random numbers
+Stream<Double> infiniteRandomNumbers = Stream.generate(Math::random);
+
+// Print out only the first 10 random numbers
+infiniteRandomNumbers.limit(10).forEach(System.out::println);
+
+
+// Section 57.5: Collect Elements of a Stream into a Collection
+
+// Collect with toList() and toSet()
+
+// Elements from a Stream can be easily collected into a container
+// by using the Stream.collect operation:
+System.out.println(Arrays.
+	.asList("apple", "banana", "pear", "kiwi", "orange")
+	.stream()
+	.filter(s -> s.contains("a"))
+	.collect(Collectors.toList())
+);
+// prints: [apple, banana, pear, orange]
+
+// Other collection instances, such as a Set, can be made
+// by using other Collects built-in methods. 
+// For example, Collectos.toSet() collects the elements of a Stream into a Set.
 
 
 
