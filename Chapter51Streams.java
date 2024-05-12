@@ -283,6 +283,129 @@ System.out.println(Arrays.
 // by using other Collects built-in methods. 
 // For example, Collectos.toSet() collects the elements of a Stream into a Set.
 
+// Explicit control over the implementation of List or Set
+
+// Acddording to documentation of Collectors#toList() and Collectors#toSet(),
+// there are no guarantees on the type, mutability, serializability,
+// or thread-safety of the List or Set returned.
+
+// For explicit control over the implementation to be returned,
+// Collectors#toCollection(Supplier) can be used instead,
+// where the given supplier returns a new and empty collection.
+
+// syntax with method reference
+System.out.println(strings
+		.stream()
+		.filter(s -> s != null && s.length() <= 3)
+		.collect(Collectors.toCollection(ArrayList::new))
+);
+
+// syntax with lambda
+System.out.println(strings
+	.stream()
+	.filter(s -> s != null && s.length() <= 3)
+	.collect(Collectors.toCollection(() -> new LinkedHashSet<>()))
+);
+
+// Collecting Elements using toMap
+
+// Collectors accumulates elements into a Map,
+// Whhere key is the Student Id and Value is Student Value.
+List<Student> students = new ArrayList<Student>();
+students.add(new Student(1, "test1"));
+students.add(new Student(2, "test2"));
+students.add(new Student(3, "test3"));
+
+Map<Integer, String> IdToName = students.stream()
+	.collect(Collectors.toMap(Student::getId, Student::getName));
+System.out.println(IdToName);
+
+// Output:
+// {1=test1, 2=test2, 3=test3}
+
+// The Collectors.toMap has another implementation
+// Collector<T, ?, Map<K,U>> toMap(Function<? super T, ? extends K> keyMapper, Function<? super T, ? extends U> valueMapper, BinaryOperator<U> mergeFunction).
+// The mergeFunction is mostly used to select either new value or retain old value
+// if the key is repeated when adding a new member in the Map from a list.
+
+// The mergeFunction often looks like: (s1, s2) -> s1 
+// to retain value corresponding to the repeated key,
+// or (s1, s2) -> s2 to put new value for the repeated key.
+
+// Collecting Elements to Map of Collections
+
+// Example: from ArrayList to Map<String, List<>>
+
+// Often it requires to make a map of list out of a primary list.
+// Example: From a student of list, we need to tamek a map of list of subjects for each student.
+List<Student> list = new ArrayList<>();
+list.add(new Student("Davis", SUBJECT.MATH, 35.0));
+list.add(new Student("Davis", SUBJECT.SCIENCE, 12.9));
+list.add(new Student("Davis", SUBJECT.GEOGRAPHY, 37.0));
+
+list.add(new Student("", SUBJECT.ENGLISH, 85.0));
+list.add(new Student("", SUBJECT.MATH, 80.0));
+list.add(new Student("", SUBJECT.SCIENCE, 12.0));
+list.add(new Student("", SUBJECT.LITERATURE, 50.0));
+
+list.add(new Student("Robert", SUBJECT.LITERATURE, 12.0));
+Map<String, List<SUBJECT>> map = new HashMap<>();
+list.stream().forEach(s -> {
+	map.computeIfAbset(s.getName(), x -> new ArrayList<>()).add(s.getSubject());
+});
+System.out.println(map);
+
+// Output:
+{ Rober=[LITERATURE],
+Sasha[ENGLISH, MATH, SCIENCE, LITERATURE],
+Davis=[MATH, SCIENCE, GEOGRAPHY]  }
+
+// Example: from ArrayList to Map<String, Map<>>
+List<Student> list = new ArrayList<>)_;
+list.add(new Student("Davis", SUBJECT.MATH, 1, 35.0));
+list.add(new Student("Davis", SUBJECT.SCIENCE, 2, 12.9));
+list.add(new Student("Davis", SUBJECT.MATH, 3, 37.0));
+list.add(new Student("Davis", SUBJECT.SCIENCE, 4, 37.0));
+
+list.add(new Student("Sascha", SUBJECT.ENGLISH, 5, 85.0));
+list.add(new Student("Sascha", SUBJECT.MATH, 1, 80.0));
+list.add(new Student("Sascha", SUBJECT.ENGLISH, 6, 12.0));
+list.add(new Student("Sascha", SUBJECT.MATH, 3, 50.0));
+
+list.add(new Student("Robert", SUBJECT.ENGLISH, 5, 12.0));
+
+Map<String, Map<SUBJECT, List<Double>>> map new HashMap<>();
+
+list.stream().forEach(student -> {
+	map.computeIfAbsent(student.getName(), s -> new HashMap<>())
+			.computeIfAbsent(student.getSubhect(), s -> new ArrayList<>())
+			.add(student.getMarks());
+});
+
+System.out.println(map);
+
+// Output:
+{ Robert={English=[12.0]},
+Sascha={MATH=[80.0, 50.0], ENGLISH=[85.0,12.0]},
+Dabis={MATH=[35.0, 37.0], SCIENCE=[12.9, 37.0]} }
+
+// Chaet-Sheet
+// Goal			   		// Code
+// Collect to a List	Collectors.toList()
+// Collect to an ArrayList with pre-allocatesize 	Collectors.toCOllection(() -> new ArrayList<>(size))
+// Collect to a Set		Collectors.toSet()
+// Collect to a Set with better iteration performance	 Collectors.toCollection(() -> new LinkedHashSet<>())
+// Collect to a case-insensitive Set<String>	Collectors.toCollection(() -> new TreeSet<>(String.CASE_INSENSITIVE_ORDER))
+// Collect to an EnumSet<AnEnum> (best performance for enums) 	Collectiopns.toCollection(() -> EnumSet.noneOf(AnEnum.class))
+// Collect to a Map<K, V> with unique keys 		Collectors.toMap(keyFunc, valFunc)
+// Map MyObject.getter() to unique MyObject		Collectors.toMap(MyObject::getter, Function.identity())
+// Map MyObject.getter() to multiple MyObjects	Collectors.groupingBy(MyObject::getter)
+
+
+// Section 57.6: Using Streams to Imeplement Mathematical Functions
+
+
+
 
 
 
