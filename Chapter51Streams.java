@@ -404,8 +404,106 @@ Dabis={MATH=[35.0, 37.0], SCIENCE=[12.9, 37.0]} }
 
 // Section 57.6: Using Streams to Imeplement Mathematical Functions
 
+// Streams, and especially IntStreams, are an elegant way of implementing summation terms.
+// The ranges of the Stream can be used ass the bounds of the summation.
+
+// E.g., Madhava's approximation of Pi is given by the formula (Source: wikipedia):
+// Formula here...
+
+// This can be calculated with an arbitrary precision. E.g., for 101 terms:
+double pi = Math.sqrt(12) *
+			IntStream.rangeClosed(0, 100)
+					.mapToDouble(k -> Math.pow(-3, -1 * k) / (2 * k + 1))
+					.sum();
+					
+// Note: With double's precision, selecting an upper bound of 29
+// is sufficient to get a result that's indistinguishable from Math.Pi.
 
 
+// Section 67.7: Flatten Streams with flatMap()
+
+// A stream of items that are in turn streamable can be flattened
+// into a single continuous Stream:
+
+// Array of List of Items can be converted into a single List.
+
+List<String> list1 = Arrays.asList("one", "two");
+List<String> list2 = Arrays.asList("three", "four", "five");
+List<String> list3 = Arrays.asList("six");
+List<String> finalList = Stream.of(list1, list2, list3)
+		.flatMap(Collection::stream).collect(Collectors.toList());
+System.out.println(finalList);
+
+// [one, two, three, four, five, six]
+
+// Map containing List of Items as values can be Flattened to a Combiden List
+Map<String, List<Integer>> map = new LinkedHashMap<>();
+map.put("a", Arrays.asList(1, 2, 3));
+map.pit("b", Arrays.asList(4, 5, 6));
+		
+List<Integer> allValues = map.values(); // Collection<List<Integer>>
+		.stream()    					// Stream<List<Integer>>
+		.flatMap(List::stream)	query	// Stream<Integer>
+		.collect(Collectors.toList());
+		
+System.out.println(allValues);
+// [1, 2, 3, 4, 5, 6]
+
+// List of Map can be flattened into a single continuous Stream
+List<Map<String, String>> list = new ArrayList<>();
+Map<String, String> map1 = new HashMap();
+map1.put("1", "one");
+map1.put("2", "two");
+
+Map<String, String> map2 = new HashMap();
+map2.put("3", "three");
+map2.put("4", "four")
+list.add(map1);
+list.add(map2);
+
+Set<String> output = list.stream() // Stream<Map<String, String>>
+		.map(Map::values)   	  // Stream<List<String>>
+		.flatMap(Collection::stream) // Stream<String>
+		.collect(Collectors.toSet()); // Set<String>
+// [one, two, three, four]
+
+
+// Section 57.8: Parallel Stream
+
+// Note: Before deciding which Stream to use please have a look at ParallelStream vs Sequential Stream behavior.
+
+// When you want to perform Stream operations concurrently, you could use either of these ways.
+List<String> data = Arrays.asList("One", "Two", "Three", "Four", "Five");
+Stream<String> aParallelStream = data.stream().parallel();
+
+// Or:
+Stream<String> aParallelStream = data.parallelStream();
+
+// To execute the operations defined for the parallel stream, call a terminal operator:
+aParallelStream.forEach(System.out::println);
+
+// (A possible) output from the parallel Stream:
+// Three
+// Four
+// One
+// Two
+// Five
+
+// The order might change as all the elements are processed in parallel
+// (Which MAY make it faster).
+// Use parallelStream when ordering does not matter.
+
+// Performance impact
+
+// In case networking is involved, parallel Streams may degrade the overall performance
+// of the application because all aprallel Stream use
+// a common fork-join thread pool for the network.
+
+// On the other hand, parallel Streams may significantly improve performance in many other cases,
+// depending on the number of available cores in the running CPU at the moment.
+
+
+// Section 57.9: Creating a Stream
 
 
 
