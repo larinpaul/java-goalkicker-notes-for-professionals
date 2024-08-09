@@ -1,4 +1,7 @@
-public class Chapter42 {
+/**
+ * Object class methods and constructor
+ */
+public class Chapter42 { 
 
     // This documentation is for showing details with exampel about java class constructors and about Object Class
     // Methods which are automatically inherited from the superclass Object of any newly created class.
@@ -625,3 +628,4 @@ public class Chapter42 {
     // For further reading, read "Effective Java" by Joshua Bloch.
 
 }
+
