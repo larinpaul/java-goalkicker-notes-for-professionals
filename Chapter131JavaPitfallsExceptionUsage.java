@@ -84,4 +84,33 @@ public class Chapter131JavaPitfallsExceptionUsage {
 
     // Section 131.3: Pitfall - Throwing Throwable, Exception, Error or RuntimeException
 
+    // While catching
+    // the Throwable, Exception, Error and RUntimeException exceptions
+    // is bad,
+    // throwing them is even worse.
+
+    try {
+        InputStream is = new FileInputStream(someFile); // could throw IOException
+        ...
+        if (somethingBad) {
+            throw new Exception(); // WRONG
+        }
+    } catch (IOException ex) {
+        System.err.println("cannot open ...");
+    } catch (Exception ex) {
+        System.err.println("something bad happened"); // WRONG
+    }
+
+    // ...
+
+    // Certain other patterns should be avoided. For example:
+    try {
+        doSomething();
+    } catch (Exception ex) {
+        report(ex);
+        throw ex;
+    }
+
+    // Section 131.4: Pitfall - Using exceptions for normal flowcontorl
+
 }
