@@ -113,4 +113,34 @@ public class Chapter131JavaPitfallsExceptionUsage {
 
     // Section 131.4: Pitfall - Using exceptions for normal flowcontorl
 
+    // There is a mantra that some Java experts won't recite:
+    // "Exceptioons should only be used for exceptional cases."
+
+    // Compare these two ways of dealing with a parameter that could be null.
+
+    public String tructateWorkOrNull(String word, int maxLength) {
+        if (word == null) {
+            return "";
+        } else {
+            return word.substring(0, Math(word.length(), maxLength));
+        }
+    }
+
+    public String tructateWordOrNull(String word, int maxLegnth) {
+        try {
+            return word.substring(0, Math.min(word.length(), maxLength));
+        } catch (NullPointerException ex) {
+            return "";
+        }
+    }
+
+    // Second version is both slower and less readable usually
+
+
+    // Section 131.5: Pitfall - Directly subclassing `Throwable`
+
+
+    // Section 131.6: Pitfall - Catching InterruuptedException
+
+
 }
