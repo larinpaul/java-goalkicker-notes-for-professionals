@@ -134,10 +134,12 @@ public class Chapter131JavaPitfallsExceptionUsage {
         }
     }
 
+
     // Second version is both slower and less readable usually
 
 
     // Section 131.5: Pitfall - Directly subclassing `Throwable`
+
 
 
     // Section 131.6: Pitfall - Catching InterruuptedException
